@@ -27,6 +27,7 @@ class App extends Component {
 
 App.protoTypes = {
   angle: PropTypes.number.isRequired,
+  moveObjects: PropTypes.func.isRequired,
 }
 
 export default App;
