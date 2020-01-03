@@ -22,6 +22,7 @@ const Canvas = (props) => {
             id="aliens-go-home-canvas"
             viewBox={viewBox}
             onMouseMove={props.trackMouse}
+            onClick={props.shoot}
         >
             <defs>
                 <filter id="shadow">
@@ -30,9 +31,11 @@ const Canvas = (props) => {
             </defs>
             <Sky />
             <Ground />
+            {props.gameState.cannonBalls.map(cannonBall => {
+                return <CannonBall key={cannonBall.id} position={cannonBall.position} />
+            })}
             <CannonBase />
             <CannonPipe rotation={props.angle} />
-            <CannonBall position={{ x: 0, y: -100 }} />
             <CurrentScore score={15} />
             <Heart position={{ x: -300, y: 35 }} />
             {props.gameState.started &&
@@ -91,6 +94,7 @@ Canvas.propTypes = {
     })),
     trackMouse: PropTypes.func.isRequired,
     startGame: PropTypes.func.isRequired,
+    shoot: PropTypes.func.isRequired,
 };
 
 export default Canvas;
