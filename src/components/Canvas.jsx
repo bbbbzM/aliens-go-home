@@ -17,6 +17,11 @@ import { signIn } from 'auth0-web';
 const Canvas = (props) => {
     const viewBox = [window.innerWidth / -2, 100 - gameHeight, window.innerWidth, gameHeight];
 
+    const lives = [];
+    for (let i = 0; i < props.gameState.lives; i++) {
+        lives.push(<Heart key={i} position={{ x: -180 - (i * 70), y: 35 }} />)
+    }
+
     return (
         <svg
             id="aliens-go-home-canvas"
@@ -36,8 +41,8 @@ const Canvas = (props) => {
             })}
             <CannonBase />
             <CannonPipe rotation={props.angle} />
-            <CurrentScore score={15} />
-            <Heart position={{ x: -300, y: 35 }} />
+            <CurrentScore score={props.gameState.kills} />
+            {lives}
             {props.gameState.started &&
                 <g>
                     {props.gameState.flyingObjects.map((flyingObject) => {
